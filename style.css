@@ -1,0 +1,49 @@
+:root {
+    --font: 'Monaco', 'Ubuntu', '楷体', '楷体-简';
+    --code-font: 'Monaco', 'Fira Code', '华文行楷', '楷体';
+    --slidev-code-padding: 12px;
+    --prism-comment-style: normal;
+}
+
+html.dark {
+    --prism-builtin: #db7c84;
+    --prism-property: #a0c7e9;
+    --prism-keyword: #abd58e;
+}
+
+html, body, #app, #page-root {
+    font-family: var(--font);
+}
+
+pre, code, kbd, samp {
+    font-family: var(--code-font);
+}
+
+.slidev-layout kbd {
+    font-family: var(--code-font);
+}
+
+.slidev-code {
+    padding: 1.3em !important;
+    margin: 1em 0 !important;
+}
+
+:not(pre) code {
+    font-size: .8em;
+    background: transparent;
+    font-family: var(--code-font);
+    border-radius: 0;
+    color: rgb(140, 164, 181);
+    padding-top: 0;
+}
+
+:not(pre) code::before,
+:not(pre) code::after {
+    display: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    margin: 1em 0;
+}
