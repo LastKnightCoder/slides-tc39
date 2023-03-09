@@ -14,7 +14,7 @@ font:
 
 # 如何读懂 TC39
 
-熊滔 2023-03-09
+2023-03-09
 
 ---
 transition: slide-left

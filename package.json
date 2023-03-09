@@ -2,7 +2,7 @@
   "name": "how-to-read-tc39",
   "private": true,
   "scripts": {
-    "build": "slidev build",
+    "build": "slidev build --base /slides-tc39",
     "dev": "slidev --open",
     "export": "slidev export"
   },
