@@ -1,7 +1,7 @@
 ---
-theme: default
+theme: seriph
 background: https://source.unsplash.com/collection/94734566/1920x1080
-highlighter: prism
+highlighter: shiki
 lineNumbers: false
 drawings:
   persist: false
@@ -14,7 +14,19 @@ font:
 
 # 如何读懂 TC39
 
-2023-03-09
+---
+transition: slide-left
+---
+
+# 目录
+
+- TC39 是什么
+- 为什么要读规范
+- 发版流程
+- ECMA-262
+- ECMA-402
+- ECMA-404
+- ECMA-414
 
 ---
 transition: slide-left
@@ -208,16 +220,66 @@ transition: slide-up
 
 ECMAScript 国际化 API 规范
 
-`Intl` 对象是 ECMAScript 国际化 API 的一个命名空间，它提供了精确的字符串对比、数字格式化和日期时间格式化方法。
+提供语言敏感功能，作为 ECMAScript 的补充，支持需要适应不同人类语言和国家使用的语言和文化习惯的程序。
 
-场景: 通过 Intl API 对字符串，数字和日期进行国际化。
+ECMAScript 提供了一些本地化的函数，但用户对此没有控制权，其行为由实现定义，如：
+
+- Array.prototype.toLocaleString
+- String.prototype.localeCompare
+- Date.prototype.toLocaleString
+- ...
 
 ---
 transition: slide-up
 ---
 
+国际化 API 提供了几个关键的语言敏感功能，包括：
+
+- 字符串比较
+- 数字格式化
+- 日期和时间格式化
+- 相对时间格式化
+- ......
+
+
+所有的功能都打包在 `Intl` 对象中，以免命名冲突：
+
+- Intl.Collator
+- Intl.DateTimeFormat
+- Intl.DisplayNames
+- Intl.NumberFormat
+- ...
+
+---
+transition: slide-up
+---
+
+本地化字符比较，根据拼音排序：
+
 ```js
-// 日期格式化
+const username = ["陈坤", "邓超", "杜淳", "冯绍峰", "韩庚", "胡歌", "黄晓明", "贾乃亮", "李晨"];
+
+// ['陈坤', '邓超', '杜淳', '冯绍峰', '韩庚', '胡歌', '黄晓明', '贾乃亮', '李晨']
+username.sort(new Intl.Collator("zh").compare);
+```
+
+数字格式化：
+
+```js
+// 12,345.68人民币
+new Intl.NumberFormat("zh-Hans", {
+  style: "currency",
+  currency: "CNY",
+  currencyDisplay: "name",
+}).format(12345.6789);
+```
+
+---
+
+日期格式化：
+
+```js
+// 2023/03/09 18:43:47
 const res = new Intl.DateTimeFormat("zh", { 
   year: "numeric",
   // 如果不足两位，会自动补零
@@ -229,38 +291,6 @@ const res = new Intl.DateTimeFormat("zh", {
   // 设置为 false 表示采用24小时制 
   hour12: false, }
 ).format(new Date());
-```
-
-```js
-new Intl.NumberFormat("zh-Hans", {
-  style: "currency",
-  currency: "CNY",
-  currencyDisplay: "name",
-}).format(12345.6789);
-```
-
----
-
-```js
-const username = [
-  "陈坤",
-  "邓超",
-  "杜淳",
-  "冯绍峰",
-  "韩庚",
-  "胡歌",
-  "黄晓明",
-  "贾乃亮",
-  "李晨",
-  "李易峰",
-  "鹿晗",
-  "井柏然",
-  "刘烨",
-  "陆毅",
-  "孙红雷",
-];
-// 按拼音排序
-username.sort(new Intl.Collator("zh").compare);
 ```
 
 ---
@@ -328,7 +358,7 @@ transition: slide-up
 
 number 是一系列一个不包含先导 0 的十进制数字，可能在数字前包含 `-` 号，随后可能包含以小数点为前缀的小数部分，随后也可能包含指数 `e/E-/+` 组成。
 
-<img src="https://cdn.staticaly.com/gh/LastKnightCoder/image-for-2022@master/Pasted-image-20230307165707.5w4say5ufww0.png" style="zoom: 50%; width: 100%;" />
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/image-for-2022@master/Pasted-image-20230307165707.5w4say5ufww0.png" style="zoom: 50%;" />
 
 ---
 transition: slide-up

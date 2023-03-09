@@ -1,6 +1,6 @@
 :root {
     --font: 'Monaco', 'Ubuntu', '楷体', '楷体-简';
-    --code-font: 'Monaco', 'Fira Code', '华文行楷', '楷体';
+    --code-font: 'Monaco', 'Fira Code', '楷体-简', '华文行楷', '楷体';
     --slidev-code-padding: 12px;
     --prism-comment-style: normal;
 }
@@ -17,6 +17,9 @@ html, body, #app, #page-root {
 
 pre, code, kbd, samp {
     font-family: var(--code-font);
+}
+:is(pre:is([class*="language"], [class*="shiki"])) code {
+    font-size: 1.2em;
 }
 
 .slidev-layout kbd {
@@ -35,6 +38,7 @@ pre, code, kbd, samp {
     border-radius: 0;
     color: rgb(140, 164, 181);
     padding-top: 0;
+    line-height: 1.6;
 }
 
 :not(pre) code::before,
@@ -46,4 +50,12 @@ img {
     display: block;
     max-width: 100%;
     margin: 1em 0;
+}
+
+table {
+    font-size: 1rem;
+}
+
+ol, ul {
+    margin-inline-start: 2em;
 }
